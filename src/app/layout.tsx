@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/provider/theme-provider";
 import NavBar from "@/components/NavBar";
+import Filter from "@/components/filter";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,14 +19,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} m-4`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <NavBar />
+          <section className="flex flex-col gap-4">
+            <NavBar />
+            <Filter />
+          </section>
           {children}
         </ThemeProvider>
       </body>

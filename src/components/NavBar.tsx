@@ -18,11 +18,14 @@ import { cn } from "@/lib/utils";
 
 const NavBar: React.FC = () => {
   return (
-    <div className="flex justify-between gap-4 items-center m-4">
-      <Link href="/" className="text-2xl underline-offset-1 font-extrabold">
+    <div className="flex justify-between gap-4 items-center ">
+      <Link
+        href="/"
+        className="hidden lg:flex text-2xl underline-offset-1 font-extrabold"
+      >
         CurriculumCatalyst.
       </Link>
-      <div className="w-2/5">
+      <div className="w-3/5 lg:w-2/5">
         <SearchBar />
       </div>
       <div className="hidden lg:flex md:flex gap-8 items-center">
