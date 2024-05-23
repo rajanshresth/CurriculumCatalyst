@@ -2,7 +2,7 @@
 import React, { Suspense, useRef, useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Loader2, Search } from "lucide-react";
+import { Bold, Loader2, Search } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { ModeToggle } from "./mode-toggle";
@@ -16,8 +16,10 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import posthog from "posthog-js";
+import { useAuth, UserButton } from "@clerk/nextjs";
 
 const NavBar: React.FC = () => {
+  const auth = useAuth();
   return (
     <div className="flex justify-between gap-4 items-center ">
       <Link
@@ -37,13 +39,30 @@ const NavBar: React.FC = () => {
       </div>
       <div className="flex gap-4">
         <ModeToggle />
-        <Button
-          onClick={() => {
-            posthog.capture("my event", { property: "value" });
-          }}
-        >
-          Sign In
-        </Button>
+        {!auth.userId ? (
+          <Link href="/sign-in">
+            <Button
+              onClick={() => {
+                posthog.capture("Sign-out", {
+                  property: `User-id: ${auth.userId}`,
+                });
+              }}
+            >
+              Sign In
+            </Button>
+          </Link>
+        ) : (
+          <UserButton
+            appearance={{
+              variables: {
+                fontSize: "1rem",
+                colorInputBackground: "transparent",
+                fontFamilyButtons: "inherit",
+              },
+            }}
+            afterSignOutUrl="/"
+          />
+        )}
       </div>
     </div>
   );

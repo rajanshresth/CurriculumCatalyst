@@ -3,8 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/provider/theme-provider";
 import NavBar from "@/components/NavBar";
-import Filter from "@/components/filter";
 import { CSPostHogProvider } from "@/components/provider/post-hog";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,21 +19,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <CSPostHogProvider>
-        <body className={`${inter.className} m-4`}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <NavBar />
+    <ClerkProvider>
+      <html lang="en">
+        <CSPostHogProvider>
+          <body className={`${inter.className} m-4`}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <NavBar />
 
-            {children}
-          </ThemeProvider>
-        </body>
-      </CSPostHogProvider>
-    </html>
+              {children}
+            </ThemeProvider>
+          </body>
+        </CSPostHogProvider>
+      </html>
+    </ClerkProvider>
   );
 }
