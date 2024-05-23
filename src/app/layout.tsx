@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/components/provider/theme-provider";
 import NavBar from "@/components/NavBar";
 import { CSPostHogProvider } from "@/components/provider/post-hog";
 import { ClerkProvider } from "@clerk/nextjs";
-
+export const runtime = "edge";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
