@@ -15,6 +15,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
+import posthog from "posthog-js";
 
 const NavBar: React.FC = () => {
   return (
@@ -36,7 +37,13 @@ const NavBar: React.FC = () => {
       </div>
       <div className="flex gap-4">
         <ModeToggle />
-        <Button>Sign In</Button>
+        <Button
+          onClick={() => {
+            posthog.capture("my event", { property: "value" });
+          }}
+        >
+          Sign In
+        </Button>
       </div>
     </div>
   );

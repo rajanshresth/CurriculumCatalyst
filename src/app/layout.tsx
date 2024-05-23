@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/provider/theme-provider";
 import NavBar from "@/components/NavBar";
 import Filter from "@/components/filter";
+import { CSPostHogProvider } from "@/components/provider/post-hog";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,18 +20,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} m-4`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <NavBar />
+      <CSPostHogProvider>
+        <body className={`${inter.className} m-4`}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NavBar />
 
-          {children}
-        </ThemeProvider>
-      </body>
+            {children}
+          </ThemeProvider>
+        </body>
+      </CSPostHogProvider>
     </html>
   );
 }
