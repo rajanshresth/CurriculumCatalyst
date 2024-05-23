@@ -26,7 +26,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <section className="flex flex-col gap-4">
+          <section className="flex flex-col gap-4 mb-4">
             <NavBar />
             <Filter />
           </section>
