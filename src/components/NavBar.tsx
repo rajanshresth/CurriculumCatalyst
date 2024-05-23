@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, useTransition } from "react";
+import React, { Suspense, useRef, useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Loader2, Search } from "lucide-react";
@@ -26,7 +26,9 @@ const NavBar: React.FC = () => {
         CurriculumCatalyst.
       </Link>
       <div className="w-3/5 lg:w-2/5">
-        <SearchBar />
+        <Suspense>
+          <SearchBar />
+        </Suspense>
       </div>
       <div className="hidden lg:flex md:flex gap-8 items-center">
         <NavigationRoadmap />
@@ -78,7 +80,9 @@ const SearchBar: React.FC = () => {
           {isSearching ? (
             <Loader2 className="h-6 w-6 animate-spin" />
           ) : (
-            <Search className="h-6 w-6" />
+            <Suspense>
+              <Search className="h-6 w-6" />
+            </Suspense>
           )}
         </Button>
       </div>
