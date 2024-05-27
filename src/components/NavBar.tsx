@@ -21,7 +21,7 @@ import { useAuth, UserButton } from "@clerk/nextjs";
 const NavBar: React.FC = () => {
   const auth = useAuth();
   return (
-    <div className="flex justify-between gap-4 items-center ">
+    <div className="flex justify-between gap-4 items-center mb-4">
       <Link
         href="/"
         className="hidden lg:flex text-2xl underline-offset-1 font-extrabold"
